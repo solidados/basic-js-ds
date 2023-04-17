@@ -14,9 +14,9 @@ const { NotImplementedError, ListNode } = require('../extensions/index.js');
  * queue.getUnderlyingList() // returns { value: 3, next: null }
  */
 class Queue {
-  constructor(value, next = nul) {
+  constructor() {
     this.head = null;
-    this.tail = null;
+    this.length = 0;
   }
 
   getUnderlyingList() {
@@ -34,20 +34,26 @@ class Queue {
     }
     this.tail = node; */
 
-    let node = new ListNode(value);
+    const node = new ListNode(value);
     if (!this.head) {
       this.head = node;
-      this.tail = node;
+      // this.tail = node;
     } else {
-      this.tail = node;
-      this.tail.next = node;
+      let last = this.head;
+      
+      // this.tail = node;
+      // this.tail.next = node;
+      while (last.next) {
+        last = last.next;
+      }
+      last.next = node;
     }
   }
 
-  dequeue(value) {
-    let presentPosition = this.head;
-    this.head = this.head.next;
-    return presentPosition.value;
+  dequeue() {
+    let currentPosition = this.head;
+    this.head = currentPosition.next;
+    return currentPosition.value;
 
     /* const node = new Node(value, this.head);
     this.head = node;
